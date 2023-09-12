@@ -1,0 +1,61 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id      String   @id() @unique
+  user_id String
+  scripts Script[]
+}
+
+model Script {
+  id          String          @id() @default(uuid())
+  name        String
+  description String
+  creator_id  String
+  account_id  String
+  account     Account         @relation(fields: [account_id], references: [id])
+  versions    ScriptVersion[]
+}
+
+enum Status {
+  DRAFT
+  TESTING
+  PROD
+}
+
+model ScriptVersion {
+  // id String @id @default(uuid())
+  created_at        DateTime          @default(now())
+  script_id         String
+  script            Script            @relation(fields: [script_id], references: [id])
+  version           Int
+  status            Status            @default(DRAFT)
+  arguments_schema  Json
+  script_schema     Json
+  script_schema_raw Json
+  result_schema     Json
+  production_script ProductionScript?
+
+  @@id([script_id, version])
+}
+
+model ProductionScript {
+  // id                 Int           @id @default(autoincrement())
+  script_ver_id      String
+  script_ver_version Int
+  script_version     ScriptVersion @relation(fields: [script_ver_id, script_ver_version], references: [script_id, version])
+  arguments_schema   Json
+  prod_script        Json
+  result_schema      Json
+
+  @@id([script_ver_id, script_ver_version])
+}
