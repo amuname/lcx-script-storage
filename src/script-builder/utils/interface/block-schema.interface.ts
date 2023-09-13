@@ -7,11 +7,7 @@ export interface Block {
   wrapper: string;
   wrapper_arguments: WrapperArguments;
   wrapper_result_schema: Record<string, any>;
-  next:
-    | {
-        id: string;
-      }[]
-    | never[];
+  next: string;
 }
 
 export type BlockCallSchema = Record<string | 'start' | 'end', Block>;
@@ -27,11 +23,7 @@ const schema = {
       value: 'some value',
     },
     wrapper_result_schema: {},
-    next: [
-      {
-        id: 'block1',
-      },
-    ],
+    next: 'block1',
   },
   block1: {
     id: 'block1',
@@ -43,11 +35,7 @@ const schema = {
       value: 'wrapper value',
     },
     wrapper_result_schema: {},
-    next: [
-      {
-        id: 'end',
-      },
-    ],
+    next: 'end',
   },
   end: {
     id: 'end',
@@ -59,6 +47,6 @@ const schema = {
       value: 'context value',
     },
     wrapper_result_schema: {},
-    next: [],
+    next: '',
   },
 };
