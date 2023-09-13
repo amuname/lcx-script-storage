@@ -30,7 +30,7 @@ describe('PrismaServiceService', () => {
         wrapper: 'Start',
         wrapper_arguments: {} as any,
         wrapper_result_schema: [],
-        next: [{ id: '5dde4deb-86d6-43ba-8d3d-d282af6aca2b' }],
+        next: '5dde4deb-86d6-43ba-8d3d-d282af6aca2b',
       },
       end: {
         id: 'end',
@@ -39,7 +39,7 @@ describe('PrismaServiceService', () => {
         wrapper: 'End',
         wrapper_arguments: {} as any,
         wrapper_result_schema: [],
-        next: [],
+        next: '',
       },
       '5dde4deb-86d6-43ba-8d3d-d282af6aca2b': {
         id: '5dde4deb-86d6-43ba-8d3d-d282af6aca2b',
@@ -54,7 +54,7 @@ describe('PrismaServiceService', () => {
         },
         wrapper_result_schema: ['primitive', 'number'],
         prev_id: 'start',
-        next: [{ id: 'd7b987c6-e262-4449-a4a1-886d8654e00c' }],
+        next: 'd7b987c6-e262-4449-a4a1-886d8654e00c',
       },
       'd7b987c6-e262-4449-a4a1-886d8654e00c': {
         id: 'd7b987c6-e262-4449-a4a1-886d8654e00c',
@@ -66,7 +66,7 @@ describe('PrismaServiceService', () => {
         },
         wrapper_result_schema: ['primitive', 'number'],
         prev_id: '5dde4deb-86d6-43ba-8d3d-d282af6aca2b',
-        next: [{ id: 'end' }],
+        next: 'end',
       },
     };
 
